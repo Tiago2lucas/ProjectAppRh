@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 
 
-
+@Entity
 public class Vaga implements Serializable {
 
 
@@ -38,6 +38,8 @@ public class Vaga implements Serializable {
 	@NotEmpty
 	private String data;
 	
+	
+	// List de Candi, relacionada a VAGA, caso ela for remove, todos Candi sera removido por meio da anotação
 	@OneToMany(mappedBy = "vaga", cascade = CascadeType.REMOVE)
 	private List<Candidato> candidatos;
 	

@@ -50,7 +50,7 @@ public class Candidato {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
 	public Vaga getVaga() {
 		return vaga;
 	}
