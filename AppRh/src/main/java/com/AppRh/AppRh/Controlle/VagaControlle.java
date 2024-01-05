@@ -18,6 +18,7 @@ import com.AppRh.AppRh.models.Vaga;
 @Controller
 public class VagaControlle {
 
+<<<<<<< HEAD
 	private VagaRepository vr;
 	private CandidatoRepository cr;
 
@@ -161,4 +162,89 @@ public class VagaControlle {
 
 	}
 
+=======
+	
+	private VagaRepository vr;
+	private CandidatoRepository cr;
+	
+	
+	@RequestMapping(value = "/cadastrarVaga", method = RequestMethod.GET)
+	public String form(){
+		return "vaga/formVaga";
+	}
+	
+	@RequestMapping(value = "/cadastrarVaga", method = RequestMethod.POST)
+	public String form (@Valid Vaga vaga, BindingResult result, RedirectAttributes attributes) {
+		
+		//Caso de resultado da validação  tenha um  erro no formulario
+		if(result.hasErrors()) {
+			attributes.addFlashAttribute("mensangem", "Verifique os campos...");
+			return "redirect:/cadastrarVaga";
+			
+		}
+		
+		// O Validação estive sem erros,  e o formulario for enviado com sucesso
+		vr.save(vaga);
+		attributes.addFlashAttribute("mesangem",  "vaga cadastrada com sucesso");
+		return "redirect:/cadastrarVaga";
+	}
+	
+	
+	//Lista Todas as VagasVaga
+	@RequestMapping("/vaga")
+	public ModelAndView listaVaga() {
+		ModelAndView mv = new ModelAndView("vaga/listaVaga");
+		//Percorre uma List de vaga, ou seja pega todas as vagas.
+		Iterable<Vaga> vagas = vr.findAll();
+		mv.addObject("vagas", vagas);
+		return mv;
+	}	
+	
+	// Lista os Candidatos
+	
+	@RequestMapping(value = "/{codigo}", method = RequestMethod.GET)
+	public ModelAndView detalhesVaga(@PathVariable("codigo") long codigo ) {
+	
+		Vaga vaga = vr.findByCodigo(codigo);
+		
+		ModelAndView mv = new ModelAndView("/vaga/detalhesVaga");
+		mv.addObject("vaga", vaga);
+		
+		//Lista os candidados que esta vinculado a Vaga
+		Iterable <Candidato> candidatos = cr.findByVaga(vaga);
+		
+		mv.addObject( "candidatos", candidatos);
+		
+		return mv;
+		
+	}
+	
+	// DELETA VAGA
+	@RequestMapping (value = "/deletarVaga")
+	public String deletarVaga(long codigo) {
+		Vaga vaga = vr.findByCodigo(codigo);
+		vr.delete(vaga);
+		
+		return " redirect:/vagas";
+		
+	}
+
+	public String  detalhesVagaPost(@PathVariable("codigo") long codigo, @Valid Candidato candidato,
+			BindingResult result, RedirectAttributes attributes) {
+			
+		//Resultado da Validação
+		if(result.hasErrors()) {
+		attributes.addFlashAttribute("mensagem", "Verifique os campos...");
+		return "redirect:/{codigo}";
+	}
+		
+	//rg duplicado
+		if(cr.findByRg(candidato.getRg()) != null) {
+		attributes.addFlashAttribute("mensagem erro"," RG duplicado");
+		return "redirect:/{codigo}";
+}
+		
+	
+	
+>>>>>>> 412a15b32299a21e20e5c859d45cfbc79385df93
 }
