@@ -18,8 +18,10 @@ import com.AppRh.AppRh.models.Vaga;
 @Controller
 public class VagaControlle {
 
-<<<<<<< HEAD
+	@Autowired
 	private VagaRepository vr;
+
+	@Autowired
 	private CandidatoRepository cr;
 
 	@RequestMapping(value = "/cadastrarVaga", method = RequestMethod.GET)
@@ -27,20 +29,20 @@ public class VagaControlle {
 		return "vaga/formVaga";
 	}
 
-		//CADASTRAR VAGA
+	// CADASTRAR VAGA
 	@RequestMapping(value = "/cadastrarVaga", method = RequestMethod.POST)
 	public String form(@Valid Vaga vaga, BindingResult result, RedirectAttributes attributes) {
 
 		// Caso de resultado da validação tenha um erro no formulario
 		if (result.hasErrors()) {
-			attributes.addFlashAttribute("mensangem", "Verifique os campos...");
+			attributes.addFlashAttribute("mensagem", "Verifique os campos...");
 			return "redirect:/cadastrarVaga";
 
 		}
 
 		// O Validação estive sem erros, e o formulario for enviado com sucesso
 		vr.save(vaga);
-		attributes.addFlashAttribute("mesangem", "vaga cadastrada com sucesso");
+		attributes.addFlashAttribute("mensagem", "Vaga cadastrada com sucesso");
 		return "redirect:/cadastrarVaga";
 	}
 
@@ -56,6 +58,7 @@ public class VagaControlle {
 
 	// LISTA CANDIDATOS
 
+	// DETALHES DE VAGA 
 	@RequestMapping(value = "/{codigo}", method = RequestMethod.GET)
 	public ModelAndView detalhesVaga(@PathVariable("codigo") long codigo) {
 
@@ -67,22 +70,15 @@ public class VagaControlle {
 		// Lista os candidados que esta vinculado a Vaga
 		Iterable<Candidato> candidatos = cr.findByVaga(vaga);
 
+		
 		mv.addObject("candidatos", candidatos);
 
 		return mv;
 
 	}
 
-	// DELETA VAGA
-	@RequestMapping(value = "/deletarVaga")
-	public String deletarVaga(long codigo) {
-		Vaga vaga = vr.findByCodigo(codigo);
-		vr.delete(vaga);
-
-		return " redirect:/vagas";
-
-	}
-
+	// MÉTODO ADICIONA CANDIDADO
+	@RequestMapping(value = "/{codigo}", method = RequestMethod.POST)
 	public String detalhesVagaPost(@PathVariable("codigo") long codigo, @Valid Candidato candidato,
 			BindingResult result, RedirectAttributes attributes) {
 
@@ -94,7 +90,7 @@ public class VagaControlle {
 
 		// rg duplicado
 		if (cr.findByRg(candidato.getRg()) != null) {
-			attributes.addFlashAttribute("mensagem erro", " RG duplicado");
+			attributes.addFlashAttribute("mensagem_erro", " RG duplicado");
 			return "redirect:/{codigo}";
 		}
 
@@ -102,8 +98,19 @@ public class VagaControlle {
 		Vaga vaga = vr.findByCodigo(codigo);
 		candidato.setVaga(vaga);
 		cr.save(candidato);
-		attributes.addFlashAttribute("mensagem ", "Candidato adicionado com Sucesso!");
+		attributes.addFlashAttribute("mensagem", "Candidato adicionado com Sucesso!");
 		return "redirect:/{codigo}";
+
+	}
+
+	/* MÉTODOS DE DELET */
+	// DELETA VAGA
+	@RequestMapping("/deletarVaga")
+	public String deletarVaga(long codigo) {
+		Vaga vaga = vr.findByCodigo(codigo);
+		vr.delete(vaga);
+
+		return "redirect:/vagas";
 
 	}
 
@@ -126,7 +133,7 @@ public class VagaControlle {
 		return "redirect:/" + codigo;
 	}
 
-	// MÉTODO QUE FAZEM UPDATE DA VAGA
+	/* MÉTODO QUE FAZEM UPDATE DA VAGA */
 
 	// FORMULÁRIO DA VAGA
 	@RequestMapping(value = "/editar-vaga", method = RequestMethod.GET)
@@ -151,7 +158,7 @@ public class VagaControlle {
 		vr.save(vaga);
 
 		// Adiciona uma mensagem de sucesso aos atributos de redirecionamento
-		attributes.addFlashAttribute("sucess", "Vaga alterada com sucesso!");
+		attributes.addFlashAttribute("success", "Vaga alterada com sucesso!");
 
 		// Obtém o código da vaga
 		long codigoLog = vaga.getCodigo();
@@ -162,89 +169,4 @@ public class VagaControlle {
 
 	}
 
-=======
-	
-	private VagaRepository vr;
-	private CandidatoRepository cr;
-	
-	
-	@RequestMapping(value = "/cadastrarVaga", method = RequestMethod.GET)
-	public String form(){
-		return "vaga/formVaga";
-	}
-	
-	@RequestMapping(value = "/cadastrarVaga", method = RequestMethod.POST)
-	public String form (@Valid Vaga vaga, BindingResult result, RedirectAttributes attributes) {
-		
-		//Caso de resultado da validação  tenha um  erro no formulario
-		if(result.hasErrors()) {
-			attributes.addFlashAttribute("mensangem", "Verifique os campos...");
-			return "redirect:/cadastrarVaga";
-			
-		}
-		
-		// O Validação estive sem erros,  e o formulario for enviado com sucesso
-		vr.save(vaga);
-		attributes.addFlashAttribute("mesangem",  "vaga cadastrada com sucesso");
-		return "redirect:/cadastrarVaga";
-	}
-	
-	
-	//Lista Todas as VagasVaga
-	@RequestMapping("/vaga")
-	public ModelAndView listaVaga() {
-		ModelAndView mv = new ModelAndView("vaga/listaVaga");
-		//Percorre uma List de vaga, ou seja pega todas as vagas.
-		Iterable<Vaga> vagas = vr.findAll();
-		mv.addObject("vagas", vagas);
-		return mv;
-	}	
-	
-	// Lista os Candidatos
-	
-	@RequestMapping(value = "/{codigo}", method = RequestMethod.GET)
-	public ModelAndView detalhesVaga(@PathVariable("codigo") long codigo ) {
-	
-		Vaga vaga = vr.findByCodigo(codigo);
-		
-		ModelAndView mv = new ModelAndView("/vaga/detalhesVaga");
-		mv.addObject("vaga", vaga);
-		
-		//Lista os candidados que esta vinculado a Vaga
-		Iterable <Candidato> candidatos = cr.findByVaga(vaga);
-		
-		mv.addObject( "candidatos", candidatos);
-		
-		return mv;
-		
-	}
-	
-	// DELETA VAGA
-	@RequestMapping (value = "/deletarVaga")
-	public String deletarVaga(long codigo) {
-		Vaga vaga = vr.findByCodigo(codigo);
-		vr.delete(vaga);
-		
-		return " redirect:/vagas";
-		
-	}
-
-	public String  detalhesVagaPost(@PathVariable("codigo") long codigo, @Valid Candidato candidato,
-			BindingResult result, RedirectAttributes attributes) {
-			
-		//Resultado da Validação
-		if(result.hasErrors()) {
-		attributes.addFlashAttribute("mensagem", "Verifique os campos...");
-		return "redirect:/{codigo}";
-	}
-		
-	//rg duplicado
-		if(cr.findByRg(candidato.getRg()) != null) {
-		attributes.addFlashAttribute("mensagem erro"," RG duplicado");
-		return "redirect:/{codigo}";
-}
-		
-	
-	
->>>>>>> 412a15b32299a21e20e5c859d45cfbc79385df93
 }

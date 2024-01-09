@@ -1,6 +1,6 @@
-<<<<<<< HEAD
+
 <!DOCTYPE html>
-<html lang=”pt-br” xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="pt-br" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
 
@@ -32,7 +32,7 @@
 
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="#">App RH</a>
+				<a class="navbar-brand" href="/">App RH</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
 					aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -74,14 +74,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td><a href="#"><span></span></a></td>
-					<td><span></span></td>
-					<td>R$ <span></span></td>
-					<td><span></span></td>
-					<td><a href="#"><button type="button" class="btn btn-danger">Excluir</button></a></td>
-					<td><a href="#"><button type="button" class="btn btn-primary">Editar</button></a></td>
-					<td><a href="#"><button type="button" class="btn btn-success">Adicionar candidato</button></a></td>
+				<tr th:each="vaga: ${vagas}">
+					<td><a th:href="${(#mvc.url('VC#detalhesVaga').arg(0, vaga.codigo)).build()}">
+						<span th:text="${vaga.nome}"></span></a></td>
+					<td><span th:text="${vaga.descricao}" ></span></td>
+					<td>R$ <span th:text="${vaga.salario}"></span></td>
+					<td><span th:text="${vaga.data}" ></span></td>
+					<td><a th:href="${(#mvc.url('VC#deletarVaga').arg(0, vaga.codigo)).build()}"><button type="button" class="btn btn-danger">Excluir</button></a></td>
+					<td><a th:href="${(#mvc.url('VC#editarVaga').arg(0, vaga.codigo)).build()}"><button type="button" class="btn btn-primary">Editar</button></a></td>
+					<td><a th:href="${(#mvc.url('VC#detalhesVagaPost').arg(0, vaga.codigo)).build()}"><button type="button" class="btn btn-success">Adicionar candidato</button></a></td>
 				</tr>
 			</tbody>
 		</table>
@@ -104,6 +105,4 @@
 </body>
 
 </html>
-=======
-listaVaga
->>>>>>> 412a15b32299a21e20e5c859d45cfbc79385df93
+
