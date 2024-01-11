@@ -39,10 +39,10 @@
 						<li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
 
 						<li class="nav-item"><a class="nav-link" href="/vagas">
-								<< Listar Vagas>>
+								 Listar Vagas
 							</a></li>
 						<li class="nav-item"><a class="nav-link" href="/cadastrarVaga">
-								<< Cadastrar Vaga>>
+								 Cadastrar Vaga
 							</a></li>
 
 
@@ -56,19 +56,20 @@
 
 	<div class="container">
 
+		<th:block th:include ="mensagemValidacao"></th:block>
 
 
 
-
-		<form method="post">
+		<form method="post" th:object="${vaga}">
 
 			<h1>Atualizar vaga</h1>
 
 			<br>
+		
 
 			<div class="form-group">
 				<label for=""><b>Nome do cargo:</b> </label> <input type="text" class="form-control" value=""
-					name="nome" required /> <small class="form-text text-muted"><i>* Utilize nomes e
+					name="nome" th:attr="value = ${vaga.nome}" required /> <small class="form-text text-muted"><i>* Utilize nomes e
 						termos mais utilizados no mercado.</i></small>
 			</div>
 
@@ -78,7 +79,7 @@
 				<div class="col">
 					<div class="form-group">
 						<label for=""><b>Data de expiração:</b></label> <input type="date" class="form-control" value=""
-							name="data" required /><small class="form-text text-muted"><i>* Data em que a vaga
+							name="data"  th:attr="value = ${vaga.data}" required /><small class="form-text text-muted"><i>* Data em que a vaga
 								expira.</i></small>
 					</div>
 				</div>
@@ -86,7 +87,7 @@
 
 					<div class="form-group">
 						<label for=""><b>Salário:</b></label> R$ <input type="number" class="form-control"
-							pattern="^\d+(\.|\,)\d{2}$" value="" name="salario" required /><small
+							pattern="^\d+(\.|\,)\d{2}$" value="" name="salario" th:attr="value = ${vaga.salario}" required /><small
 							class="form-text text-muted"><i>* Utilize valores
 								considerando vírgula e ponto.</i></small>
 					</div>
@@ -95,14 +96,14 @@
 
 			<div class="form-group">
 				<label for=""><b>Descrição da vaga:</b></label>
-				<textarea class="form-control" name="descricao" maxlength="254" rows="3" required></textarea>
+				<textarea class="form-control" name="descricao" th:text="${vaga.descricao}" maxlength="254" rows="3" required></textarea>
 				<small class="form-text text-muted"><i>* Breve resumo da
 						vaga oferecida..</i></small>
 			</div>
 
 
 
-			<button type="submit" class="btn btn-success">Salvar</button>
+			<button type="submit"  class="btn btn-success">Salvar</button>
 		</form>
 	</div>
 

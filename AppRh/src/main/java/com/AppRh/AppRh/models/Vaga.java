@@ -1,50 +1,39 @@
 package com.AppRh.AppRh.models;
 
-
 import java.io.Serializable;
 import java.util.List;
-
-import javax.annotation.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotEmpty;
 
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Vaga implements Serializable {
 
-
-		//Att controle de versionamento 
-	private static final long serialVersionUID = 1L ;
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long codigo;
-
+	
 	@NotEmpty
 	private String nome;
-	
 	
 	@NotEmpty
 	private String descricao;
 	
 	@NotEmpty
-	private String salario;
-	
-	@NotEmpty
 	private String data;
 	
+	@NotEmpty
+	private String salario;
 	
-	// List de Candi, relacionada a VAGA, caso ela for remove, todos Candi sera removido por meio da anotação
 	@OneToMany(mappedBy = "vaga", cascade = CascadeType.REMOVE)
 	private List<Candidato> candidatos;
-	
-	
-	// Getters Setters
 
 	public long getCodigo() {
 		return codigo;
@@ -70,14 +59,6 @@ public class Vaga implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public String getSalario() {
-		return salario;
-	}
-
-	public void setSalario(String salario) {
-		this.salario = salario;
-	}
-
 	public String getData() {
 		return data;
 	}
@@ -86,13 +67,21 @@ public class Vaga implements Serializable {
 		this.data = data;
 	}
 
+	public String getSalario() {
+		return salario;
+	}
+
+	public void setSalario(String salario) {
+		this.salario = salario;
+	}
+
 	public List<Candidato> getCandidatos() {
 		return candidatos;
 	}
 
 	public void setCandidatos(List<Candidato> candidatos) {
 		this.candidatos = candidatos;
-	}	
+	}
 	
 	
 	

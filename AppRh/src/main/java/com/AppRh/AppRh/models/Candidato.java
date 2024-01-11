@@ -7,10 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 
-
 @Entity
 public class Candidato {
-
+	
 	@Id
 	@GeneratedValue
 	private long id;
@@ -50,7 +49,7 @@ public class Candidato {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public Vaga getVaga() {
 		return vaga;
 	}
@@ -60,4 +59,5 @@ public class Candidato {
 	}
 	
 	
+
 }
