@@ -41,7 +41,7 @@ git clone "endereço do projeto"
 AppRh 1.0 version
 
 ## 📄 Licença
-Copyright (c) <2024> <Tiago Lucas F. da Silva >
+Copyright (c) <2024> Tiago Lucas F. da Silva 
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
