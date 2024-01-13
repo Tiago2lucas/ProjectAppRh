@@ -26,7 +26,7 @@ git clone "endereço do projeto"
 * [Wamp](https://sourceforge.net/projects/wampserver/)
 * [VSCODE](https://visualstudio.microsoft.com/pt-br/)
 
-## O que deve fazer apos as instalações:
+## 📢 Instrução instalações obrigatória :
 * Crie um banco dados com nome apprh
 * Usuario é Root padrão
 * senha: não tem senha
