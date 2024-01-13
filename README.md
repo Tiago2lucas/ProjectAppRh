@@ -28,6 +28,8 @@ git clone "endereço do projeto"
 
 ## O que deve fazer apos as instalações:
 * Crie um banco dados com nome apprh
+* Usuario é Root padrão
+* senha: não tem senha
 
 
 ## 🛠️ Construído com
@@ -40,6 +42,10 @@ git clone "endereço do projeto"
 
 AppRh 1.0 version
 
+## Video demostrativo:
+[Baixe o arquivo](https://drive.google.com/file/d/1J-dPK5whgeS8T7bAJdgnWL2PKGP8jRHL/view?usp=drive_link)
+
+ 
 ## 📄 Licença
 Copyright (c) <2024> Tiago Lucas F. da Silva 
 
