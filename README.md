@@ -17,6 +17,7 @@ git clone "endereço do projeto"
 * Banco de dados MySQL (version 8.0.31)
 * WampServerServidor para MySQL
 * IDE VSCODE(opção sua pode ser outras)
+* Bootstrap 5.1
 
 
 ### 🔧 Instalação
@@ -25,6 +26,7 @@ git clone "endereço do projeto"
 * [MySQLWorkbench 8.0.31](https://downloads.mysql.com/archives/installer/)
 * [Wamp](https://sourceforge.net/projects/wampserver/)
 * [VSCODE](https://visualstudio.microsoft.com/pt-br/)
+* [Bootstrap5.1](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 
 ## 📢 Instrução instalações obrigatória :
 * Crie um banco dados com nome apprh
