@@ -2,6 +2,9 @@
 
 Projeto de cadastramento de vagas e candidatos.
 
+## Objetivos
+Esse pequenos projeto web, tem finalidade de ser implantado em um site web, como complementos de controle de fluxo de candidatos e vagas.
+
 ## 🚀 Começando
 
 Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
